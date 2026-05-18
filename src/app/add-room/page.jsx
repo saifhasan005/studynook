@@ -11,23 +11,44 @@ const amenities = [
 ];
 
 const AddRoomPage = () => {
-    return (
-        <div className="mx-auto p-5 max-w-7xl">
-            <h1 className="font-bold text-2xl mb-4">Add Room</h1>
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const room = Object.fromEntries(formData.entries());
 
-            <Card className="max-w-3xl">
-                <div className="p-8 w-full">
-                    <form className="space-y-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        const res = await fetch(`http://localhost:5000/rooms`, {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(room)
+        })
+        const data = await res.json();
+        console.log(data);
+    };
+
+    return (
+
+        <div className="mx-auto px-4 py-6 md:p-8 max-w-7xl">
+            <h1 className="font-bold text-2xl md:text-3xl mb-6 text-slate-800 dark:text-slate-100 text-center">Add Room</h1>
+
+            <Card className="max-w-3xl w-full mx-auto">
+
+                <div className="p-5 md:p-8 w-full">
+                    <form onSubmit={onSubmit} className="space-y-6 md:space-y-8">
+
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+
 
                             <div className="md:col-span-2">
-                                <TextField name="destinationName" isRequired>
+                                <TextField isRequired>
                                     <Label>Room Name</Label>
-                                    <Input placeholder="Bali Paradise" radius="lg" />
+                                    <Input name="roomName" placeholder="Quantum Coding Cell" radius="lg" />
                                 </TextField>
                             </div>
 
-                            <div>
+                            <div className="w-full">
                                 <Select name="amenities" className="w-full" radius="lg">
                                     <Label>Amenities</Label>
                                     <Select.Trigger>
@@ -37,7 +58,7 @@ const AddRoomPage = () => {
                                     <Select.Popover>
                                         <ListBox items={amenities}>
                                             {(item) => (
-                                                <ListBox.Item key={item.key} id={item.key}>
+                                                <ListBox.Item key={item.key} id={item.key} textValue={item.label}>
                                                     <Label>{item.label}</Label>
                                                 </ListBox.Item>
                                             )}
@@ -46,47 +67,59 @@ const AddRoomPage = () => {
                                 </Select>
                             </div>
 
-                            <TextField name="capacity">
-                                <Label>Capacity</Label>
-                                <Input type="number" placeholder="04" radius="lg" />
-                            </TextField>
 
-                            <TextField name="price" isRequired>
-                                <Label>Hourly Rate (USD)</Label>
-                                <Input
-                                    type="number"
-                                    placeholder="5"
-                                    radius="lg"
-                                    startContent={
-                                        <div className="pointer-events-none flex items-center">
-                                            <span className="text-default-400 text-small">$</span>
-                                        </div>
-                                    }
-                                />
-                            </TextField>
-                                <TextField name="floor">
-                                    <Label>Floor</Label>
-                                    <Input type="number" placeholder="3" radius="lg" />
+                            <div>
+                                <TextField>
+                                    <Label>Capacity</Label>
+                                    <Input name="capacity" type="number" placeholder="04" radius="lg" />
                                 </TextField>
-                          
+                            </div>
+
+
+                            <div>
+                                <TextField isRequired>
+                                    <Label>Hourly Rate (USD)</Label>
+                                    <Input
+                                        name="hourlyRate"
+                                        type="number"
+                                        placeholder="5"
+                                        radius="lg"
+                                        startContent={
+                                            <div className="pointer-events-none flex items-center">
+                                                <span className="text-default-400 text-small">$</span>
+                                            </div>
+                                        }
+                                    />
+                                </TextField>
+                            </div>
+
+
+                            <div>
+                                <TextField>
+                                    <Label>Floor</Label>
+                                    <Input name="floor" type="number" placeholder="3" radius="lg" />
+                                </TextField>
+                            </div>
+
 
                             <div className="md:col-span-2">
-                                <TextField name="imageUrl" isRequired>
+                                <TextField isRequired>
                                     <Label>Image URL</Label>
-                                    <Input type="url" placeholder="https://example.com/room.jpg" radius="lg" />
+                                    <Input name="imageUrl" type="url" placeholder="https://example.com/room.jpg" radius="lg" />
                                 </TextField>
                             </div>
 
                             <div className="md:col-span-2">
-                                <TextField name="description" isRequired>
+                                <TextField isRequired>
                                     <Label>Description</Label>
-                                    <TextArea placeholder="Describe the room experience..." />
+                                    <TextArea name="description" placeholder="Describe the room experience..." />
                                 </TextField>
                             </div>
 
                         </div>
 
-                        <Button className="w-full bg-purple-800 text-white rounded-md py-2.5 hover:bg-purple-700">
+
+                        <Button type="submit" className="w-full bg-purple-800 text-white rounded-md py-3 text-base font-medium hover:bg-purple-700 transition-colors">
                             Register
                         </Button>
                     </form>
