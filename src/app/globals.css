@@ -2,11 +2,6 @@
 @import "@heroui/styles";
 @variant dark (&:where(.dark, .dark *));
 
-/* src/app/globals.css */
-@import "tailwindcss";
-
-@variant dark (&:where(.dark, .dark *));
-
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);

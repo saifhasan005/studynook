@@ -18,6 +18,7 @@ const Navbar = () => {
     const navLinks = [
         { href: '/', label: 'Home' },
         { href: '/rooms', label: 'Rooms' },
+        { href: '/add-room', label: 'Add Room'}
     ];
     return (
         <nav className='sticky top-0 z-50 bg-white dark:bg-zinc-950 shadow-md px-4 sm:px-6 lg:px-12 py-3'>
