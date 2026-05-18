@@ -1,19 +1,26 @@
 import React from 'react';
+import RoomCard from './RoomCard';
 
 const LatestRoom = async () => {
-    const res = await fetch('http://localhost:5000/rooms');
+    const res = await fetch('http://localhost:5000/rooms', { cache: 'no-store' });
     const data = await res.json();
-  
+
     return (
         <div className='container mx-auto mt-[45px] px-4'>
-            <h1 className='font-bold text-3xl text-purple-700 mb-4'>Latest Booking</h1>
+            <h1 
+                className='font-bold text-3xl text-purple-700 mb-4'
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                Latest Booking
+            </h1>
             
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {
-                    data.map(room => {
-                        
-                        return <h2 key={room._id} className="text-xl dark:text-white text-gray-800">{room.name}</h2>;
-                    })
+                    data?.map((room, index) => (
+                        <RoomCard room={room} key={room._id} index={index} />
+                    ))
                 }
             </div>
         </div>

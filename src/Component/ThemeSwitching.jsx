@@ -21,14 +21,14 @@ export default function ThemeSwitching() {
             className="relative w-14 h-8 rounded-full bg-blue-400 dark:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
             aria-label="Toggle theme"
         >
-            {/* Sun Icon */}
+        
             <span className={`absolute top-1 left-1 text-lg transition-all duration-300 ${
                 isDark ? 'opacity-0 scale-0 rotate-90' : 'opacity-100 scale-100 rotate-0'
             }`}>
                 ☀️
             </span>
             
-            {/* Moon Icon */}
+          
             <span className={`absolute top-1 right-1 text-lg transition-all duration-300 ${
                 isDark ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-0 -rotate-90'
             }`}>

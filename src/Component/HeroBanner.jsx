@@ -16,9 +16,9 @@ const HeroBanner = () => {
             <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative'>
                 <div className='flex flex-col-reverse lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16'>
                     
-                    {/* Text Content */}
+                   
                     <div className='w-full lg:w-1/2 space-y-4 sm:space-y-6 text-center lg:text-left'>
-                        {/* Badge */}
+                     
                         <div className='flex justify-center lg:justify-start'>
                             <span className='inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300'>
                                 🚀 Start Learning Today
@@ -40,7 +40,7 @@ const HeroBanner = () => {
                             List your own room and earn money.
                         </p>
 
-                        {/* Stats */}
+                       
                         <div className='flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 pt-2'>
                             <div className='text-center'>
                                 <div className='text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white'>500+</div>
@@ -56,7 +56,7 @@ const HeroBanner = () => {
                             </div>
                         </div>
                         
-                        {/* Buttons */}
+                       
                         <div className='flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 pt-2'>
                             <Link href={'/rooms'}>
                                 <Button 
@@ -69,7 +69,6 @@ const HeroBanner = () => {
                         </div>
                     </div>
 
-                    {/* Image */}
                     <div className='w-full lg:w-1/2 flex justify-center'>
                         <div className='relative group'>
                             <div className='absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl sm:rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-300'></div>
