@@ -15,10 +15,6 @@ const RoomDetailsPage = async ({ params }) => {
                     className="rounded-md h-full object-contain"
                 />
                 <div/>
-                <div className="absolute bottom-6 left-6">
-                    <h1 className="text-3xl md:text-4xl font-bold text-white">{singleRoom.roomName}</h1>
-                    <p className="text-white/80 text-sm mt-1">📍 Floor {singleRoom.floor ?? "N/A"}</p>
-                </div>
             </div>
 
             <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
