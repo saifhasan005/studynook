@@ -1,7 +1,7 @@
 import RoomCard from "@/Component/RoomCard";
 
 const RoomsPage = async () => {
-        const res = await fetch('http://localhost:5000/rooms', { cache: 'no-store' });
+        const res = await fetch(`${process.env.LATEST_ROOM_API}/rooms`, { cache: 'no-store' });
     const data = await res.json();
     console.log(data);
     return (

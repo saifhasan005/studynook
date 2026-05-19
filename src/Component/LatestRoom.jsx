@@ -2,7 +2,7 @@ import React from 'react';
 import RoomCard from './RoomCard';
 
 const LatestRoom = async () => {
-    const res = await fetch('http://localhost:5000/rooms/featured', { cache: 'no-store' });
+      const res = await fetch(`${process.env.LATEST_ROOM_API}/rooms/featured`, { cache: 'no-store' });
     const data = await res.json();
 
     return (

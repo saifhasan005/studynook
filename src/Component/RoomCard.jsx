@@ -149,7 +149,7 @@ const {_id} = room
                     transition={{ delay: index * 0.1 + 0.4 }}
                 >
                     <motion.p
-                        className="text-sm dark:bg-gray-800  dark:text-gray-300 px-3 py-1 rounded-full"
+                        className="text-sm dark:bg-gray-800 bg-gray-100 dark:text-gray-300 px-3 py-1 rounded-full"
                         whileHover={{ scale: 1.05, backgroundColor: "purple", color: 'white'  }}
                     >
                         📍 Floor: {room?.floor || "N/A"}
