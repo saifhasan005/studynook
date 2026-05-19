@@ -1,13 +1,40 @@
 'use client'
+import { authClient } from "@/lib/auth-client";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import { BsGoogle } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget)
+        const user = Object.fromEntries(formData.entries())
+        const { data, error } = await authClient.signUp.email({
+            email: user.email,
+            name: user.name,
+            password: user.password,
+            image: user.image
+        })
+        if (data) {
+            toast.success('Registration Success Please Login')
+            redirect('/login')
+        }
+        if (error) {
+            toast.error('Please Fill Correct Info')
+        }
+    }
+    const handleGoogleLogin = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
+    }
     return (
         <div className="space-y-5 mt-[35px]">
             <p className="text-center font-bold text-2xl">Please Register Your Account</p>
             <div className="flex flex-col items-center">
-                <Form className="border p-5 shadow rounded-md flex w-96 flex-col gap-4" >
+                <Form onSubmit={onSubmit} className="border p-5 shadow rounded-md flex w-96 flex-col gap-4" >
                     <TextField
                         isRequired
                         name="name"
@@ -32,12 +59,12 @@ const RegisterPage = () => {
                         <FieldError />
                     </TextField>
                     <TextField
-                    isRequired
-                    name="image"
-                    type="text"
+                        isRequired
+                        name="image"
+                        type="text"
                     >
-<Label>Image</Label>
-<Input placeholder="https://images.unsplash.com/photo-1497366"></Input>
+                        <Label>Image</Label>
+                        <Input placeholder="https://images.unsplash.com/photo-1497366"></Input>
                     </TextField>
                     <TextField
                         isRequired
@@ -71,8 +98,15 @@ const RegisterPage = () => {
                     </div>
                     <div>
                         <p className="text-center text-gray-600 font-semibold dark:text-gray-400">OR</p>
-                        <Button variant="outline" className="flex gap-2 rounded-none w-full items-center mt-[7px]"><BsGoogle /> Sign Up With Google</Button>
+                        <Button onClick={handleGoogleLogin} variant="primary" className="flex gap-2 rounded-md w-full items-center mt-[7px]"><BsGoogle /> Sign Up With Google</Button>
                     </div>
+                    <div className="flex gap-2 items-center justify-center">
+                        <p className="text-gray-600 dark:text-white">Already Have an Account?</p>
+                        <Link href={'/login'}>
+                            <p className="dark:text-purple-400 text-purple-600 font-semibold">Please Login</p>
+                        </Link>
+                    </div>
+
                 </Form>
             </div>
         </div>

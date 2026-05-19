@@ -1,12 +1,18 @@
 'use client'
-import { Button } from '@heroui/react';
+import { Avatar, Button } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import ThemeSwitching from './ThemeSwitching';
 import { usePathname } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
+import ProfileDropdown from './ProfileDropdown';
 
 const Navbar = () => {
+    const {
+        data: session
+    } = authClient.useSession()
+    const user = session?.user
     const [dark, setDark] = useState(false);
 
     const toggleTheme = () => {
@@ -18,7 +24,9 @@ const Navbar = () => {
     const navLinks = [
         { href: '/', label: 'Home' },
         { href: '/rooms', label: 'Rooms' },
-        { href: '/add-room', label: 'Add Room'}
+        { href: '/add-room', label: 'Add Room' },
+        { href: '/my-listing', label: 'My Listing' },
+        { href: '/my-booking', label: 'My Booking' }
     ];
     return (
         <nav className='sticky top-0 z-50 bg-white dark:bg-zinc-950 shadow-md px-4 sm:px-6 lg:px-12 py-3'>
@@ -57,17 +65,22 @@ const Navbar = () => {
 
                 <div className='hidden md:flex items-center gap-4'>
                     <ThemeSwitching />
-                    <Link href={'/login'}>
-                        <Button variant='outline' className="border hover:border-purple-500 rounded-md px-4 py-2 dark:text-white">
-                            Login
-                        </Button>
-                    </Link>
-                    <Link href={'/register'}>
-                        <Button className="bg-purple-800 text-white rounded-md px-4 py-2 hover:bg-purple-700">
-                            Register
-                        </Button>
-                    </Link>
+                    {user ? <>
+                        <ProfileDropdown user={user} />
+                    </> : <>
+                        <Link href={'/login'}>
+                            <Button variant='outline' className="border hover:border-purple-500 rounded-md px-4 py-2 dark:text-white">
+                                Login
+                            </Button>
+                        </Link>
+                        <Link href={'/register'}>
+                            <Button className="bg-purple-800 text-white rounded-md px-4 py-2 hover:bg-purple-700">
+                                Register
+                            </Button>
+                        </Link>
+                    </>}
                 </div>
+
 
 
                 <div className='flex md:hidden items-center gap-3'>
@@ -83,7 +96,7 @@ const Navbar = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         ) : (
-    
+
                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
@@ -107,17 +120,40 @@ const Navbar = () => {
                 </ul>
 
                 <div className='flex flex-col gap-3 mt-5 pt-4 border-t dark:border-zinc-800'>
-                    <Link href={'/login'} onClick={() => setIsOpen(false)} className="w-full">
-                        <Button variant='outline' className="w-full border hover:border-purple-500 rounded-md dark:text-white py-2.5">
-                            Login
-                        </Button>
-                    </Link>
-                    <Link href={'/register'} onClick={() => setIsOpen(false)} className="w-full">
-                        <Button className="w-full bg-purple-800 text-white rounded-md py-2.5 hover:bg-purple-700">
-                            Register
-                        </Button>
-                    </Link>
+                    {user ? <>
+                        <li><Avatar>
+                            <Avatar.Image alt="John Doe" src={user?.image} />
+                            <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+                        </Avatar></li>
+                        <li>
+                            <Button variant='danger' onClick={async()=> await authClient.signOut()}>
+                                Logout
+                            </Button>
+                        </li>
+                    </> : <>
+                        <Link href={'/login'} onClick={() => setIsOpen(false)} className="w-full">
+                            <Button variant='outline' className="w-full border hover:border-purple-500 rounded-md dark:text-white py-2.5">
+                                Login
+                            </Button>
+                        </Link>
+                        <Link href={'/register'} onClick={() => setIsOpen(false)} className="w-full">
+                            <Button className="w-full bg-purple-800 text-white rounded-md py-2.5 hover:bg-purple-700">
+                                Register
+                            </Button>
+                        </Link>
+                    </>}
+
+
+
+
+
+
+
+
+
+
                 </div>
+
             </div>
         </nav>
     );

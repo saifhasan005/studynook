@@ -4,10 +4,8 @@ const RoomDetailsPage = async ({ params }) => {
     const { id } = await params;
     const res = await fetch(`${process.env.LATEST_ROOM_API}/rooms/${id}`);
     const singleRoom = await res.json()
-    console.log(singleRoom);
     return (
         <div className="min-h-screen mt-[45px] bg-gray-50 dark:bg-zinc-950 pb-16">
-            {/* Hero Image */}
             <div className=" h-[320px] md:h-[460px] flex items-center justify-center overflow-hidden ">
                 <img
                     src={singleRoom.imageUrl}
@@ -34,14 +32,11 @@ const RoomDetailsPage = async ({ params }) => {
                         </div>
                     ))}
                 </div>
-
-                {/* Description */}
                 <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800">
                     <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-3">About this Room</h2>
                     <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{singleRoom.description}</p>
                 </div>
 
-                {/* Amenities */}
                 {singleRoom.amenities?.length > 0 && (
                     <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800">
                         <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Amenities</h2>
@@ -55,7 +50,6 @@ const RoomDetailsPage = async ({ params }) => {
                     </div>
                 )}
 
-                {/* Book Now */}
                 <div className="bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl p-6 shadow-lg text-white flex flex-col md:flex-row items-center justify-between gap-4">
                     <div>
                         <p className="text-purple-200 text-sm">Ready to reserve?</p>

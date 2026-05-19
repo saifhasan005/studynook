@@ -3,7 +3,6 @@ import RoomCard from "@/Component/RoomCard";
 const RoomsPage = async () => {
         const res = await fetch(`${process.env.LATEST_ROOM_API}/rooms`, { cache: 'no-store' });
     const data = await res.json();
-    console.log(data);
     return (
         <div className="container mx-auto mt-[50px]">
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
