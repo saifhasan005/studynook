@@ -1,6 +1,8 @@
-'use client';
+"use client";
 import { Input, TextArea, TextField, Button, Card } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const amenities = [
     { key: "whiteboard", label: "Whiteboard", icon: "📝" },
@@ -26,21 +28,26 @@ const AddRoomPage = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const room = Object.fromEntries(formData.entries());
-        
+
         room.amenities = selectedAmenities;
         room.capacity = Number(room.capacity);
         room.hourlyRate = Number(room.hourlyRate);
         room.floor = room.floor ? Number(room.floor) : null;
 
-            const res = await fetch(`http://localhost:5000/rooms`, {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(room)
-            });
-            const data = await res.json();
+        const res = await fetch(`http://localhost:5000/rooms`, {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(room)
+        });
+        const data = await res.json();
+        if(res){
+            toast.success(`Successfully Added Room`)
+            redirect('/rooms')
+        }
     };
+    
 
     return (
         <div className="mx-auto px-4 py-6 md:p-8 max-w-7xl">
@@ -52,8 +59,8 @@ const AddRoomPage = () => {
                 <div className="p-5 md:p-8 w-full">
                     <form onSubmit={onSubmit} className="space-y-6 md:space-y-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                            
-                            
+
+
                             <div className="md:col-span-2">
                                 <TextField isRequired>
                                     <Label>Room Name</Label>
@@ -72,8 +79,8 @@ const AddRoomPage = () => {
                                             key={amenity.key}
                                             className={`
                                                 flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all
-                                                ${selectedAmenities.includes(amenity.label) 
-                                                    ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' 
+                                                ${selectedAmenities.includes(amenity.label)
+                                                    ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20'
                                                     : 'border-gray-200 dark:border-gray-700 hover:border-purple-300'
                                                 }
                                             `}
@@ -89,11 +96,11 @@ const AddRoomPage = () => {
                                         </label>
                                     ))}
                                 </div>
-                                
+
                                 {selectedAmenities.length > 0 && (
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {selectedAmenities.map((amenity) => (
-                                            <span 
+                                            <span
                                                 key={amenity}
                                                 className="inline-flex items-center gap-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full"
                                             >
@@ -104,21 +111,21 @@ const AddRoomPage = () => {
                                 )}
                             </div>
 
-                     
+
                             <div>
                                 <TextField>
                                     <Label>Capacity</Label>
-                                    <Input 
-                                        name="capacity" 
-                                        type="number" 
-                                        placeholder="4" 
+                                    <Input
+                                        name="capacity"
+                                        type="number"
+                                        placeholder="4"
                                         radius="lg"
                                         min="1"
                                     />
                                 </TextField>
                             </div>
 
-                          
+
                             <div>
                                 <TextField isRequired>
                                     <Label>Hourly Rate (USD)</Label>
@@ -141,36 +148,36 @@ const AddRoomPage = () => {
                             <div>
                                 <TextField>
                                     <Label>Floor</Label>
-                                    <Input 
-                                        name="floor" 
-                                        type="number" 
-                                        placeholder="3" 
+                                    <Input
+                                        name="floor"
+                                        type="number"
+                                        placeholder="3"
                                         radius="lg"
                                         min="0"
                                     />
                                 </TextField>
                             </div>
 
-                   
+
                             <div className="md:col-span-2">
                                 <TextField isRequired>
                                     <Label>Image URL</Label>
-                                    <Input 
-                                        name="imageUrl" 
-                                        type="url" 
-                                        placeholder="https://example.com/room.jpg" 
-                                        radius="lg" 
+                                    <Input
+                                        name="imageUrl"
+                                        type="url"
+                                        placeholder="https://example.com/room.jpg"
+                                        radius="lg"
                                     />
                                 </TextField>
                             </div>
 
-                           
+
                             <div className="md:col-span-2">
                                 <TextField isRequired>
                                     <Label>Description</Label>
-                                    <TextArea 
-                                        name="description" 
-                                        placeholder="Describe the room experience, facilities, and any special features..." 
+                                    <TextArea
+                                        name="description"
+                                        placeholder="Describe the room experience, facilities, and any special features..."
                                         minRows={3}
                                     />
                                 </TextField>
@@ -178,8 +185,9 @@ const AddRoomPage = () => {
 
                         </div>
 
-                        <Button 
-                            type="submit" 
+                        <Button
+                         
+                            type="submit"
                             className="w-full bg-purple-800 text-white rounded-md py-3 text-base font-medium hover:bg-purple-700 transition-colors"
                         >
                             Add Room

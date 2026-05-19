@@ -149,14 +149,14 @@ const {_id} = room
                     transition={{ delay: index * 0.1 + 0.4 }}
                 >
                     <motion.p
-                        className="text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full"
-                        whileHover={{ scale: 1.05, backgroundColor: "#e0e7ff" }}
+                        className="text-sm dark:bg-gray-800  dark:text-gray-300 px-3 py-1 rounded-full"
+                        whileHover={{ scale: 1.05, backgroundColor: "purple", color: 'white'  }}
                     >
                         📍 Floor: {room?.floor || "N/A"}
                     </motion.p>
                     <motion.p
                         className="text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full"
-                        whileHover={{ scale: 1.05, backgroundColor: "#e0e7ff" }}
+                        whileHover={{ scale: 1.05, backgroundColor: "purple", color: 'white'   }}
                     >
                         🪑 Capacity: {room?.capacity || 0} {room?.capacity === 1 ? 'seat' : 'seats'}
                     </motion.p>
