@@ -24,9 +24,11 @@ const Navbar = () => {
     const navLinks = [
         { href: '/', label: 'Home' },
         { href: '/rooms', label: 'Rooms' },
-        { href: '/add-room', label: 'Add Room' },
+      ...(user ? [
+          { href: '/add-room', label: 'Add Room' },
         { href: '/my-listing', label: 'My Listing' },
-        { href: '/my-booking', label: 'My Booking' }
+        { href: '/my-bookings', label: 'My Booking' }
+      ] : [])
     ];
     return (
         <nav className='sticky top-0 z-50 bg-white dark:bg-zinc-950 shadow-md px-4 sm:px-6 lg:px-12 py-3'>

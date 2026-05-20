@@ -37,11 +37,6 @@ export default function ProfileDropdown({ user }) {
                         />
                         <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
                     </Avatar>
-
-
-
-
-
                 ) : (
                     <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs font-medium">
                         {initials}

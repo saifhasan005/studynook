@@ -1,3 +1,5 @@
+import PublishNow from "@/Component/PublishNow";
+
 
 
 const RoomDetailsPage = async ({ params }) => {
@@ -12,12 +14,13 @@ const RoomDetailsPage = async ({ params }) => {
                     alt={singleRoom.roomName}
                     className="rounded-md h-full object-contain"
                 />
-                <div/>
+                <div />
             </div>
+            <p className="text-center mt-[20px] font-semibold text-xl text-purple-500">{singleRoom.roomName}</p>
 
             <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
 
-                {/* Stats */}
+
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
                         { icon: "💰", label: "Hourly Rate", value: `$${singleRoom.hourlyRate}` },
@@ -55,9 +58,7 @@ const RoomDetailsPage = async ({ params }) => {
                         <p className="text-purple-200 text-sm">Ready to reserve?</p>
                         <p className="text-2xl font-bold">${singleRoom.hourlyRate} <span className="text-base font-normal text-purple-200">/ hour</span></p>
                     </div>
-                    <button className="bg-white text-purple-700 font-bold px-8 py-3 rounded-xl hover:bg-purple-50 transition-colors w-full md:w-auto">
-                        Book Now
-                    </button>
+                    <PublishNow singleRoom={singleRoom}/>
                 </div>
 
             </div>
