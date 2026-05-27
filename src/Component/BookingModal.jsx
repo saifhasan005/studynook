@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
+import { useProtected } from "@/hooks/useProtected";
 
 export function BookingModal({ singleRoom, onPublish }) {
+    const { protect } = useProtected();
     const hourlyRate = singleRoom?.hourlyRate || 3;
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
@@ -254,7 +255,7 @@ export function BookingModal({ singleRoom, onPublish }) {
     return (
         <>
             <button
-                onClick={() => setIsOpen(true)}
+                onClick={() => protect(() => setIsOpen(true))}
                 style={{
                     backgroundColor: '#7e22ce',
                     color: '#ffffff',

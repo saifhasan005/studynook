@@ -2,6 +2,7 @@ import React from 'react';
 import RoomCard from './RoomCard';
 
 const LatestRoom = async () => {
+    console.log(process.env.LATEST_ROOM_API);
       const res = await fetch(`${process.env.LATEST_ROOM_API}/rooms/featured`, { cache: 'no-store' });
     const data = await res.json();
 

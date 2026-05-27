@@ -6,14 +6,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '**',
+        hostname: '**', 
       },
-      // 💥 এই নতুন অবজেক্টটি যোগ করুন ক্লায়েন্ট রিভিউয়ের ছবির জন্য
       {
-        protocol: 'https',
-        hostname: 'plus.unsplash.com',
-        pathname: '**',
+        protocol: 'http',
+        hostname: '**',
       },
     ],
   },

@@ -1,4 +1,7 @@
+import { EditModal } from "@/Component/EditModal";
 import PublishNow from "@/Component/PublishNow";
+import { Button } from "@heroui/react";
+import {  BiTrash } from "react-icons/bi";
 
 
 
@@ -8,6 +11,10 @@ const RoomDetailsPage = async ({ params }) => {
     const singleRoom = await res.json()
     return (
         <div className="min-h-screen mt-[45px] bg-gray-50 dark:bg-zinc-950 pb-16">
+            <div className="flex gap-4 container mx-auto items-center justify-center">
+              <EditModal key={singleRoom._id} singleRoom={singleRoom}/>
+                <Button variant="outline" className={`rounded-none  mb-3`}><BiTrash/>Delete</Button>
+            </div>
             <div className=" h-[320px] md:h-[460px] flex items-center justify-center overflow-hidden ">
                 <img
                     src={singleRoom.imageUrl}

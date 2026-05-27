@@ -7,6 +7,7 @@ import { BsGoogle } from "react-icons/bs";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
+    
      const onSubmit = async (e)=>{
      e.preventDefault();
      const formData = new FormData(e.currentTarget)
@@ -23,6 +24,11 @@ const LoginPage = () => {
      toast.error('Invalid Email or Password')
     }
 }
+const handleGoogleLogin = async ()=>{
+        await authClient.signIn.social({
+            provider: 'google'
+        })
+    }
     return (
         <div className="space-y-5 mt-[35px]">
             <p className="text-center font-bold text-2xl">Login Your Account</p>
@@ -75,7 +81,7 @@ const LoginPage = () => {
                     </div>
                     <div>
                         <p className="text-center text-gray-600 font-semibold dark:text-gray-400">OR</p>
-                        <Button variant="primary" className="flex gap-2 rounded-none w-full items-center mt-[7px]"><BsGoogle /> Login With Google</Button>
+                        <Button onClick={handleGoogleLogin} variant="primary" className="flex gap-2 rounded-none w-full items-center mt-[7px]"><BsGoogle /> Login With Google</Button>
                     </div>
                     <div className="flex gap-2 items-center justify-center">
                         <p className="text-gray-600 dark:text-white">Not Have
