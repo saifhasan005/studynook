@@ -1,6 +1,5 @@
 import BookingDeleteAlert from '@/Component/BookingDeleteAlert';
 import { auth } from '@/lib/auth';
-import { Button } from '@heroui/react';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
@@ -46,6 +45,7 @@ const MyBookingPage = async () => {
                                 <span className="inline-flex items-center gap-1.5 text-xs font-mono text-purple-400 bg-purple-900/20 border border-purple-700/30 rounded-md px-2.5 py-1 w-fit">
                                     🕐 {booking.startTime} – {booking.endTime}
                                 </span>
+                               
 
 
                                 <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">

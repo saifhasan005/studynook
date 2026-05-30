@@ -27,7 +27,7 @@ export function EditModal({ singleRoom }) {
         const formData = new FormData(e.currentTarget);
         const roomData = Object.fromEntries(formData.entries());
         
-        // ✅ Amenities যোগ করো
+
         roomData.amenities = selectedAmenities;
         
         // ✅ Number fields convert করো
@@ -80,7 +80,7 @@ export function EditModal({ singleRoom }) {
 
     return (
         <Modal>
-            <Button variant="outline" className="mb-3 rounded-lg text-sm sm:text-base px-3 sm:px-4 py-2">
+            <Button variant="outline" className="mt-5 mb-3 rounded-lg text-sm sm:text-base px-3 sm:px-4 py-2">
                 <BiEdit className="text-base sm:text-lg" /> 
                 Edit
             </Button>
