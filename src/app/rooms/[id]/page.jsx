@@ -2,9 +2,6 @@ import DeleteAlert from "@/Component/DeleteAlert";
 import { EditModal } from "@/Component/EditModal";
 import PublishNow from "@/Component/PublishNow";
 
-
-
-
 const RoomDetailsPage = async ({ params }) => {
     const { id } = await params;
     const res = await fetch(`${process.env.LATEST_ROOM_API}/rooms/${id}`);

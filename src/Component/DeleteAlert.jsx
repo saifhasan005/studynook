@@ -3,6 +3,7 @@
 import {AlertDialog, Button} from "@heroui/react";
 import { redirect } from "next/navigation";
 import { BiTrash } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 function DeleteAlert({singleRoom}) {
     const {_id,roomName} = singleRoom;
@@ -14,7 +15,10 @@ function DeleteAlert({singleRoom}) {
             }
         })
         const data = await res.json();
-        redirect('/rooms')
+        toast.success(`${roomName} deleted Successfully`)
+        setTimeout(() => {
+        redirect('/rooms');
+    }, 1500);
     } 
   return (
     <AlertDialog>

@@ -1,4 +1,5 @@
 "use client";
+import { useProtected } from "@/hooks/useProtected";
 import { Input, TextArea, TextField, Button, Card } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -14,6 +15,7 @@ const amenities = [
 ];
 
 const AddRoomPage = () => {
+    const { session } = useProtected()
     const [selectedAmenities, setSelectedAmenities] = useState([]);
 
     const handleCheckboxChange = (amenityLabel) => {
@@ -33,6 +35,7 @@ const AddRoomPage = () => {
         room.capacity = Number(room.capacity);
         room.hourlyRate = Number(room.hourlyRate);
         room.floor = room.floor ? Number(room.floor) : null;
+        room.userId = session?.user?.id
 
         const res = await fetch(`http://localhost:5000/rooms`, {
             method: "POST",
@@ -42,12 +45,12 @@ const AddRoomPage = () => {
             body: JSON.stringify(room)
         });
         const data = await res.json();
-        if(res){
+        if (res) {
             toast.success(`Successfully Added Room`)
             redirect('/rooms')
         }
     };
-    
+
 
     return (
         <div className="mx-auto px-4 py-6 md:p-8 max-w-7xl">
@@ -186,7 +189,7 @@ const AddRoomPage = () => {
                         </div>
 
                         <Button
-                         
+
                             type="submit"
                             className="w-full bg-purple-800 text-white rounded-md py-3 text-base font-medium hover:bg-purple-700 transition-colors"
                         >

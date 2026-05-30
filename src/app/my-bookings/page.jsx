@@ -18,7 +18,7 @@ const MyBookingPage = async () => {
                 My Bookings
             </p>
 
-            {data.length < 0 ?
+            {data.length === 0 ?
                 <p className='text-center mt-[45px]'>No Booking Data Found</p> :
                 <div className="flex flex-col gap-5 max-w-3xl mx-auto">
                     {data.map(booking => (
